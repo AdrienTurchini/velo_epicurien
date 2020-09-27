@@ -1,21 +1,12 @@
 from flask import Flask
 from flask import jsonify
-import os
 
-application = Flask('flask_serv')
-env = os.environ['env']
-if env == "prod":
-    debug=False
-    port = 80
-elif env == "dev":
-    debug=True
-    port = 8080
-else:
-    raise ValueError("No known behavior for env={}".format(env))
+app = Flask("flask_serv")
+app.config["DEBUG"] = True
 
-@application.route("/heartbeat")
+@app.route("/heartbeat")
 def route():
     return {"villeChoisie":"Quebec"}
 
-if __name__ == "__main__":
-    application.run('0.0.0.0', port=port, debug=debug)
+if __name__ == '__main__': 
+    app.run(host='0.0.0.0',port='8080')

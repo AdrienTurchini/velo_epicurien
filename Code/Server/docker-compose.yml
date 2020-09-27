@@ -5,10 +5,10 @@ services:
   app:
     build: . 
     ports:
-      - 80:80
+      - 8080:8080
 
   database1:
     image: mongo
     
   database2:
-    image: elasticsearch:7.9.1
+    image: elasticsearch:6.8.12

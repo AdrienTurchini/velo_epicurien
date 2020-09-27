@@ -4,14 +4,11 @@ services:
 
   app:
     build: . 
+    ports:
       - 80:80
 
   database1:
-    image: <nom_image_bd_1>
+    image: mongo
     
   database2:
-    image: <nom_image_db_2>
-
-
-
-
+    image: elasticsearch:7.9.1

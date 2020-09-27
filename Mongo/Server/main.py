@@ -2,7 +2,7 @@ from flask import Flask
 from flask import jsonify
 import os
 
-application = Flask('demo_flask')
+application = Flask('flask_serv')
 env = os.environ['env']
 if env == "prod":
     debug=False
@@ -15,7 +15,7 @@ else:
 
 @application.route("/heartbeat")
 def route():
-    return {"villeChoisie":"BeauportBeach"}
+    return {"villeChoisie":"Quebec"}
 
 if __name__ == "__main__":
     application.run('0.0.0.0', port=port, debug=debug)

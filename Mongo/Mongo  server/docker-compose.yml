@@ -1,0 +1,17 @@
+version: '3.7'
+
+services:
+
+  app:
+    build: . 
+      - 80:80
+
+  database1:
+    image: <nom_image_bd_1>
+    
+  database2:
+    image: <nom_image_db_2>
+
+
+
+

@@ -12,7 +12,8 @@
     "dependencies": {
         "express": "",
         "mongoose": "",
-        "ejs":""
+        "ejs":"",
+        "assert":""
     },
     "devDependencies": {
         "nodemon": ""

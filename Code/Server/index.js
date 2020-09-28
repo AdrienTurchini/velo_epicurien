@@ -24,5 +24,4 @@ app.get("/heartbeat", (req, res) => {
     });
 });
 
-const port = 3000;
-app.listen(port, () => console.log('Server running...'));
+app.listen(3000, () => console.log('Server running...'));

@@ -1,14 +1,17 @@
-version: '3.7'
-
+version: "3"
 services:
-
-  app:
-    build: . 
-    ports:
-      - 8080:8080
-
-  database1:
-    image: mongo
-    
-  database2:
-    image: elasticsearch:6.8.12
+    app:
+        container_name: express-mongo
+        restart: always
+        build: ./
+        ports:
+            - "80:3000"
+        volumes:
+            - /app/node_modules
+        links:
+            - mongo
+    mongo:
+        container_name: mongo
+        image: mongo
+        ports:
+            - "27017:27017"

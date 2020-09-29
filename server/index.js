@@ -1,5 +1,10 @@
 const app = require('express')();
 const mongoose = require('mongoose');
+const { Client } = require("@elastic/elasticsearch");
+
+// Connect to Elasticsearch daemon
+const elasticUrl = process.env.ELASTIC_URL || "http://localhost:9200";
+const esclient   = new Client({ node: elasticUrl });
 
 // Connect to Mongo daemon
 mongoose.connect(

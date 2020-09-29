@@ -11,6 +11,8 @@
     "license": "ISC",
     "dependencies": {
         "express": "",
-        "mongoose": ""
+        "mongoose": "",
+        "@elastic/elasticsearch": "",
+        "dotenv": ""
     }
 }

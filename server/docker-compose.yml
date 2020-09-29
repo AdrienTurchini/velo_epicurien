@@ -10,14 +10,14 @@ services:
             - /app/node_modules
         links:
             - mongo
-            - elasticsearch
+            - neo4j
     mongo:
         container_name: mongo
         image: mongo
         ports:
             - "27017:27017"
-    elasticsearch:
-        container_name: elasticsearch
-        image: elasticsearch:6.8.12
+    neo4j:
+        container_name: neo4j
+        image: neo4j
         ports:
-            - "9200:9200"
+            - "17474:7474"

@@ -1,18 +1,19 @@
 const app = require('express')();
 const mongoose = require('mongoose');
-const { Client } = require("@elastic/elasticsearch");
+const neo4j = require('neo4j-driver');
 
-// Connect to Elasticsearch daemon
-const elasticUrl = process.env.ELASTIC_URL || "http://localhost:9200";
-const esclient   = new Client({ node: elasticUrl });
+// Connect to Neo4j daemon
+var driver = neo4j.driver(
+    'neo4j://localhost:7474',
+    neo4j.auth.basic('neo4j', 'neo4j'))
 
 // Connect to Mongo daemon
 mongoose.connect(
-    'mongodb://mongo:27017/expressmongo',
-    { 
+    'mongodb://mongo:27017/expressmongo', { 
         useNewUrlParser: true 
-    }).then(() => console.log('MongoDB Connected')
-).catch(err => console.log(err));
+    })
+    .then(() => console.log('MongoDB Connected !'))
+    .catch(err => console.log(err));
 
 // Get index.html route
 app.get('/',function(req,res) {

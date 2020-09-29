@@ -12,7 +12,6 @@
     "dependencies": {
         "express": "",
         "mongoose": "",
-        "@elastic/elasticsearch": "",
-        "dotenv": ""
+        "neo4j-driver": ""
     }
 }

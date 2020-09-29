@@ -1,4 +1,13 @@
 const app = require('express')();
+const mongoose = require('mongoose');
+
+// Connect to Mongo daemon
+mongoose.connect(
+    'mongodb://mongo:27017/expressmongo',
+    { 
+        useNewUrlParser: true 
+    }).then(() => console.log('MongoDB Connected')
+).catch(err => console.log(err));
 
 // Get index.html route
 app.get('/',function(req,res) {

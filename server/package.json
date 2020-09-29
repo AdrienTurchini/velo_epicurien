@@ -1,21 +1,16 @@
 {
-    "name": "docker-demo",
+    "name": "velo_epi",
     "version": "1.0.0",
     "description": "",
     "main": "index.js",
     "scripts": {
-        "start": "nodemon index.js"
+        "start": "node index.js" 
     },
     "keywords": [],
     "author": "Jamal",
     "license": "ISC",
     "dependencies": {
         "express": "",
-        "mongoose": "",
-        "ejs":"",
-        "assert":""
-    },
-    "devDependencies": {
-        "nodemon": ""
+        "mongoose": ""
     }
 }

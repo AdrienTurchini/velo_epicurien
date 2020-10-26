@@ -14,16 +14,17 @@ async function mongo(Restaurants) {
 
 // Population de Neo4j
 async function neo4j(session) {
-    const personName = 'Alice'
-
     try {
-        const result = await session.run(
-            'CREATE (a:Person {name: $name}) RETURN a',
-            { name: personName }
-        )
-        const singleRecord = result.records[0]
-        const node = singleRecord.get(0)   
-        console.log(node.properties.name)
+        await session.run(
+            `MATCH (n) DETACH DELETE n`
+        );
+        for(var i in data_pistes) {
+            await session.run(
+                `CREATE (p:Piste {id: ${data_pistes[i].properties.ID}}) ` +
+                `SET p.longueur = ${data_pistes[i].properties.LONGUEUR} ` +
+                `SET p.coords = [${data_pistes[i].geometry.coordinates}]`
+            );
+        }
     } finally {
         await session.close()
     }

@@ -3,30 +3,10 @@ const mongoose = require('mongoose');
 const neo4j = require('neo4j-driver');
 const populate = require('./populate.js');
 
+// Connect to Neo4j daemon
 var driver = neo4j.driver(
     'bolt://neo4j:7687'
 );
-var session = driver.session({ defaultAccessMode: neo4j.session.WRITE });
-
-populate.neo4j(session);
-
-session = driver.session({ defaultAccessMode: neo4j.session.READ });
-async function test(session) {
-    const personName = 'Alice'
-    try {
-        const result = await session.run(
-            'MATCH (a:Person {name: $name}) RETURN a',
-            { name: personName }
-        )
-        const singleRecord = result.records[0]
-        const node = singleRecord.get(0)   
-        console.log(node.properties.name)
-    } finally {
-        await session.close()
-        await driver.close()
-    }
-}
-test(session);
 
 // Connect to Mongo daemon
 mongoose.connect(
@@ -56,7 +36,7 @@ var restaurant_types = {};
 const schema = new mongoose.Schema({}, {strict: false, versionKey: false, id: false}, 'movies');
 const Restaurants = mongoose.model('restaurants', schema,'restaurants');
 
-async function mongoQueryAndPop(Restaurants) {
+async function mongoQueryAndPop() {
     await populate.mongo(Restaurants);
     
     await Restaurants.find({})
@@ -74,14 +54,39 @@ async function mongoQueryAndPop(Restaurants) {
         restaurant_types[types[i]._id] = types[i].total;
     }
 };
-mongoQueryAndPop(Restaurants);
+mongoQueryAndPop();
 
+// Mongo population && querys
+var nbSegments;
+var longueurCyclable;
+async function neo4jQueryAndPop() {
+    var session = driver.session({ defaultAccessMode: neo4j.session.WRITE });
+    await populate.neo4j(session);
+
+    session = driver.session({ defaultAccessMode: neo4j.session.READ });
+    var readTxResultPromise = session.readTransaction(txc => {
+        var result = txc.run(`MATCH (p:Piste) RETURN p.longueur`);
+        return result;
+    });
+    readTxResultPromise.then(result => {
+        longueurCyclable = 0;
+        for(var i in result.records) {
+            longueurCyclable += parseFloat(result.records[i]._fields[0]);
+        }
+        nbSegments = result.records.length;
+    }).catch(error => {
+        console.log(error);
+    }).then(() => {
+        session.close();
+    });
+}
+neo4jQueryAndPop();
 
 // Get extracted_data route
 app.get("/extracted_data", (req, res) => {
     res.send({
         nbRestaurants: nbRestaurants,
-        nbSegments: 'a finir'
+        nbSegments: nbSegments
     });
 });
 
@@ -89,7 +94,7 @@ app.get("/extracted_data", (req, res) => {
 app.get("/transformed_data", (req, res) => {
     res.send({
         restaurants: restaurant_types,
-        longueurCyclable:'a finir'
+        longueurCyclable: longueurCyclable
     });
 });
 

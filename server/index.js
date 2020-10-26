@@ -30,7 +30,15 @@ app.get("/heartbeat", (req, res) => {
     });
 });
 
-app.listen(3000, () => console.log('Server running...'));
+// Get extracted_data route
+app.get("/extracted_data", (req, res) => {
+    res.send({
+        nbRestaurants: 'a finir',
+        nbSegments: 'a finir'
+    });
+});
+
+app.listen(3000, () => console.log('Express server running...'));
 
 // Mongo population
 const schema = new mongoose.Schema({}, {strict: false, versionKey: false, id: false}, 'movies');

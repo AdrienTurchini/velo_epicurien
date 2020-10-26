@@ -7,7 +7,6 @@ const populate = require('./populate.js');
 const driver = neo4j.driver(
     'neo4j://localhost:7474',
     neo4j.auth.basic('neo4j', 'neo4j'))
-const ne4jSession = driver.session();
 
 // Connect to Mongo daemon
 mongoose.connect(
@@ -37,7 +36,7 @@ var restaurant_types;
 const schema = new mongoose.Schema({}, {strict: false, versionKey: false, id: false}, 'movies');
 const Restaurants = mongoose.model('restaurants', schema,'restaurants');
 
-async function queryAndPop(Restaurants) {
+async function mongoQueryAndPop(Restaurants) {
     await populate.mongo(Restaurants);
     
     await Restaurants.find({})
@@ -50,10 +49,14 @@ async function queryAndPop(Restaurants) {
         restaurant_types = restaurants;
     });
 }
-queryAndPop(Restaurants);
+mongoQueryAndPop(Restaurants);
 
 // Neo4j population && querys
-
+const neo4jSession = driver.session();
+async function neo4jQueryAndPop(neo4jSession) {
+    await populate.neo4j(neo4jSession);
+}
+neo4jQueryAndPop(neo4jSession);
 
 // Get extracted_data route
 app.get("/extracted_data", (req, res) => {

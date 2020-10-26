@@ -4,9 +4,10 @@ const neo4j = require('neo4j-driver');
 const populateMongo = require('./populate.js');
 
 // Connect to Neo4j daemon
-var driver = neo4j.driver(
+const driver = neo4j.driver(
     'neo4j://localhost:7474',
     neo4j.auth.basic('neo4j', 'neo4j'))
+const ne4jSession = driver.session();
 
 // Connect to Mongo daemon
 mongoose.connect(

@@ -27,7 +27,7 @@ app.get("/heartbeat", (req, res) => {
 
 // Mongo population && querys
 var nbRestaurants;
-var restaurant_types = [];
+var restaurant_types = {};
 const schema = new mongoose.Schema({}, {strict: false, versionKey: false, id: false}, 'movies');
 const Restaurants = mongoose.model('restaurants', schema,'restaurants');
 
@@ -41,13 +41,12 @@ async function mongoQueryAndPop(Restaurants) {
 
     var types = await Restaurants.aggregate([
         {$unwind:"$type"},
-        {$group: {"_id":"$type", "total":{"$sum":1}}}]
-    );
+        {$group: {"_id": "$type", "total": {"$sum": 1}}},
+        {$sort: {"total": -1, posts: 1}}
+    ]);
 
-    for(var i = 0; i < types.length; i++){
-        type_name = types[i]._id;
-        type_total = types[i].total;
-        restaurant_types.push({type_name, type_total});
+    for(var i in types) {
+        restaurant_types[types[i]._id] = types[i].total;
     }
 };
 mongoQueryAndPop(Restaurants);

@@ -15,7 +15,8 @@ const schema = new mongoose.Schema({
     }
 });
 const restaurants = mongoose.model('restaurants', schema);
-restaurants.collection.insert(data_restau).then(result => {
+restaurants.collection.insert(data_restau)
+.then(result => {
     console.log(`Successfully inserted ${result} items!`);
     return result;
 }).catch(err => console.error(`Failed to insert documents: ${err}`));

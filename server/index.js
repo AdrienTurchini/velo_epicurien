@@ -5,12 +5,12 @@ const populate = require('./populate.js');
 
 // Connect to Neo4j daemon
 const driver = neo4j.driver(
-    'neo4j://localhost:7474',
+    'bolt://localhost:7474',
     neo4j.auth.basic('neo4j', 'neo4j'))
 
 // Connect to Mongo daemon
 mongoose.connect(
-    'mongodb://mongo:27017/expressmongo', { 
+    'mongodb://mongo:27017', { 
         useNewUrlParser: true 
     })
     .then(() => console.log('MongoDB Connected !'))
@@ -56,7 +56,7 @@ const neo4jSession = driver.session();
 async function neo4jQueryAndPop(neo4jSession) {
     await populate.neo4j(neo4jSession);
 }
-neo4jQueryAndPop(neo4jSession);
+// neo4jQueryAndPop(neo4jSession);
 
 // Get extracted_data route
 app.get("/extracted_data", (req, res) => {

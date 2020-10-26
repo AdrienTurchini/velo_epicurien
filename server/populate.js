@@ -13,15 +13,20 @@ async function mongo(Restaurants) {
 }
 
 // Population de Neo4j
-async function neo4j(Session) {
-    await Session.run(
-        `CALL apoc.load.json(${data_pistes}) ` +
-        `YIELD value ` +
-        `CREATE (p:Piste {properties: value.properties}) ` +
-        `SET p.type = value.type ` +
-        `SET p.geometry = value.geometry `
-    );
-    await Session.close();
+async function neo4j(session) {
+    const personName = 'Alice'
+
+    try {
+        const result = await session.run(
+            'CREATE (a:Person {name: $name}) RETURN a',
+            { name: personName }
+        )
+        const singleRecord = result.records[0]
+        const node = singleRecord.get(0)   
+        console.log(node.properties.name)
+    } finally {
+        await session.close()
+    }
 }
 
 // Export 

@@ -30,17 +30,44 @@ app.get("/heartbeat", (req, res) => {
     });
 });
 
+// Mongo population && querys
+var nbRestaurants;
+var restaurant_types;
+const schema = new mongoose.Schema({}, {strict: false, versionKey: false, id: false}, 'movies');
+const Restaurants = mongoose.model('restaurants', schema,'restaurants');
+
+async function queryAndPop(Restaurants) {
+    await populateMongo(Restaurants);
+    
+    await Restaurants.find({})
+    .then(restaurants =>  {
+        nbRestaurants = restaurants.length;
+    });
+
+    await Restaurants.find({})
+    .then(restaurants =>  {
+        restaurant_types = restaurants;
+    });
+}
+queryAndPop(Restaurants);
+
+// Neo4j population && querys
+
+
 // Get extracted_data route
 app.get("/extracted_data", (req, res) => {
     res.send({
-        nbRestaurants: 'a finir',
+        nbRestaurants: nbRestaurants,
         nbSegments: 'a finir'
     });
 });
 
-app.listen(3000, () => console.log('Express server running...'));
+// Get transformed_data route
+app.get("/transformed_data", (req, res) => {
+    res.send({
+        restaurants: restaurant_types,
+        longueurCyclable:'a finir'
+    });
+});
 
-// Mongo population
-const schema = new mongoose.Schema({}, {strict: false, versionKey: false, id: false}, 'movies');
-const Restaurants = mongoose.model('restaurants', schema,'restaurants');
-populateMongo(Restaurants);
+app.listen(3000, () => console.log('Express server running...'));

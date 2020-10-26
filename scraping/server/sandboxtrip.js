@@ -22,9 +22,9 @@ async function sandbox() {
 
     // get a list of informations for all  restaurants
     var listOfRestauDetails = [];  
-    for(var i = 0; i < 1 ; i++){ // linksRestau.length
+    for(var i = 0; i < linksRestau.length ; i++){ // linksRestau.length
       var restaurant = await trip.scrapeRestaurant('https://www.tripadvisor.fr'+linksRestau[i]);
-      restaurant = {name: restaurant.name, classement: restaurant.classement, address: restaurant.address, link: 'https://www.tripadvisor.fr'+linksRestau[i], geometry: restaurant.geo};
+      restaurant = {name: restaurant.name, classement: restaurant.classement, type: restaurant.types, price: restaurant.price, address: restaurant.address, link: 'https://www.tripadvisor.fr'+linksRestau[i], geometry: restaurant.geo};
       listOfRestauDetails.push(restaurant);
       console.log(i);
     }

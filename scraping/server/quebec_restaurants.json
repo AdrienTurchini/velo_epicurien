@@ -1,0 +1,621 @@
+[
+    {
+        "name": "D'Orsay Restaurant Pub",
+        "classement": "4,0",
+        "type": [
+            "Internationale",
+            "Européenne",
+            "Brasserie gastronomique"
+        ],
+        "price": "€€-€€€",
+        "address": "65 rue de Buade Au coin des rue De Buade et Des Jardins, Québec (ville), Québec G1R 4A2 Canada",
+        "link": "https://www.tripadvisor.fr/Restaurant_Review-g155033-d708344-Reviews-D_Orsay_Restaurant_Pub-Quebec_City_Quebec.html",
+        "geometry": {
+            "type": "Point",
+            "coordinates": [
+                -71.20724,
+                46.813686
+            ]
+        }
+    },
+    {
+        "name": "Restaurant Tanière³",
+        "classement": "5,0",
+        "type": [
+            "Internationale",
+            "Moderne",
+            "Canadienne"
+        ],
+        "price": "€€€€",
+        "address": "38 rue Saint-Pierre, Québec (ville), Québec G1K 3Z6 Canada",
+        "link": "https://www.tripadvisor.fr/Restaurant_Review-g155033-d16849058-Reviews-Restaurant_Taniere-Quebec_City_Quebec.html",
+        "geometry": {
+            "type": "Point",
+            "coordinates": [
+                -71.20236,
+                46.813427
+            ]
+        }
+    },
+    {
+        "name": "ARVI",
+        "classement": "5,0",
+        "type": [
+            "Canadienne",
+            "Végétariens bienvenus"
+        ],
+        "price": "€€€€",
+        "address": "519 3éme Avenue, Québec (ville), Québec G1L 2W4 Canada",
+        "link": "https://www.tripadvisor.fr/Restaurant_Review-g155033-d14965572-Reviews-Arvi-Quebec_City_Quebec.html",
+        "geometry": {
+            "type": "Point",
+            "coordinates": [
+                -71.22719,
+                46.823433
+            ]
+        }
+    },
+    {
+        "name": "Bachir",
+        "classement": "5,0",
+        "type": [
+            "Libanaise",
+            "Méditerranéenne",
+            "Saine"
+        ],
+        "price": "€",
+        "address": "54, boulevard Rene Levesque Ouest, Québec (ville), Québec G1R 2A4 Canada",
+        "link": "https://www.tripadvisor.fr/Restaurant_Review-g155033-d3975172-Reviews-Bachir-Quebec_City_Quebec.html",
+        "geometry": {
+            "type": "Point",
+            "coordinates": [
+                -71.22623,
+                46.80458
+            ]
+        }
+    },
+    {
+        "name": "Chez Rioux & Pettigrew",
+        "classement": "4,5",
+        "type": [
+            "Française",
+            "Canadienne",
+            "Végétariens bienvenus"
+        ],
+        "price": "€€-€€€",
+        "address": "160 rue St-Paul, Québec (ville), Québec G1K 3W1 Canada",
+        "link": "https://www.tripadvisor.fr/Restaurant_Review-g155033-d4401734-Reviews-Chez_Rioux_Pettigrew-Quebec_City_Quebec.html",
+        "geometry": {
+            "type": "Point",
+            "coordinates": [
+                -71.20719,
+                46.81675
+            ]
+        }
+    },
+    {
+        "name": "Bistro la Goulette",
+        "classement": "5,0",
+        "type": [
+            "Marocaine",
+            "Méditerranéenne",
+            "Diner"
+        ],
+        "price": "€€-€€€",
+        "address": "56 Boulevard René-Lévesque Ouest Près de l'intersection de l'avenue Cartier, au dessus de Restaurant le Bachir, Québec (ville), Québec G1R 2A4 Canada",
+        "link": "https://www.tripadvisor.fr/Restaurant_Review-g155033-d4849525-Reviews-Bistro_La_Goulette-Quebec_City_Quebec.html",
+        "geometry": {
+            "type": "Point",
+            "coordinates": [
+                -71.22639,
+                46.80474
+            ]
+        }
+    },
+    {
+        "name": "L'Atelier Tartares & Cocktails",
+        "classement": "4,0",
+        "type": [
+            "Bar",
+            "Canadienne",
+            "Végétariens bienvenus"
+        ],
+        "price": "€€-€€€",
+        "address": "624 Rue Grande-Allee Est, Québec (ville), Québec G1R 2K5 Canada",
+        "link": "https://www.tripadvisor.fr/Restaurant_Review-g155033-d3428824-Reviews-L_Atelier_Tartares_Cocktails-Quebec_City_Quebec.html",
+        "geometry": {
+            "type": "Point",
+            "coordinates": [
+                -71.21674,
+                46.806423
+            ]
+        }
+    },
+    {
+        "name": "Bistro La Cohue",
+        "classement": "4,5",
+        "type": [
+            "Française",
+            "Européenne",
+            "Canadienne"
+        ],
+        "price": "€€-€€€",
+        "address": "3440 Chemin des Quatre Bourgeois 3440 Chemin des Quatre Bourgeois, Québec (ville), Québec G1W 4T3 Canada",
+        "link": "https://www.tripadvisor.fr/Restaurant_Review-g155033-d779938-Reviews-Bistro_La_Cohue-Quebec_City_Quebec.html",
+        "geometry": {
+            "type": "Point",
+            "coordinates": [
+                -71.31724,
+                46.76314
+            ]
+        }
+    },
+    {
+        "name": "Laurie Raphael",
+        "classement": "4,5",
+        "type": [
+            "Moderne",
+            "Canadienne",
+            "Végétariens bienvenus"
+        ],
+        "price": "€€€€",
+        "address": "117 Rue Dalhousie Vieux-Port, Québec (ville), Québec G1K 9C8 Canada",
+        "link": "https://www.tripadvisor.fr/Restaurant_Review-g155033-d980224-Reviews-Laurie_Raphael-Quebec_City_Quebec.html",
+        "geometry": {
+            "type": "Point",
+            "coordinates": [
+                -71.20248,
+                46.817112
+            ]
+        }
+    },
+    {
+        "name": "Beclub Bistro Bar",
+        "classement": "5,0",
+        "type": [
+            "Bar",
+            "Canadienne",
+            "Végétariens bienvenus"
+        ],
+        "price": "€€-€€€",
+        "address": "17, Rue Saint Stanislas, Québec (ville), Québec G1R 4G7 Canada",
+        "link": "https://www.tripadvisor.fr/Restaurant_Review-g155033-d10284275-Reviews-Beclub_Bistro_Bar-Quebec_City_Quebec.html",
+        "geometry": {
+            "type": "Point",
+            "coordinates": [
+                -71.21152,
+                46.813896
+            ]
+        }
+    },
+    {
+        "name": "La Pizzaio",
+        "classement": "4,5",
+        "type": [
+            "Italienne",
+            "Pizza",
+            "Végétariens bienvenus"
+        ],
+        "price": "€€-€€€",
+        "address": "319 Rue Saint Paul, Québec (ville), Québec G1K 3W8 Canada",
+        "link": "https://www.tripadvisor.fr/Restaurant_Review-g155033-d1521491-Reviews-La_Pizzaio-Quebec_City_Quebec.html",
+        "geometry": {
+            "type": "Point",
+            "coordinates": [
+                -71.21226,
+                46.816837
+            ]
+        }
+    },
+    {
+        "name": "Ô 6E Sens",
+        "classement": "4,5",
+        "type": [
+            "Moderne",
+            "Saine",
+            "Canadienne"
+        ],
+        "price": "€€-€€€",
+        "address": "1200, Avenue Germain-des-Pres, Québec (ville), Québec G1V 3M7 Canada",
+        "link": "https://www.tripadvisor.fr/Restaurant_Review-g155033-d2475811-Reviews-O_6E_Sens-Quebec_City_Quebec.html",
+        "geometry": {
+            "type": "Point",
+            "coordinates": [
+                -71.287056,
+                46.76853
+            ]
+        }
+    },
+    {
+        "name": "La Planque",
+        "classement": "4,5",
+        "type": [
+            "Française",
+            "Canadienne",
+            "Végétariens bienvenus"
+        ],
+        "price": "€€€€",
+        "address": "1027, 3Eme Avenue, Québec (ville), Québec G1L 3X3 Canada",
+        "link": "https://www.tripadvisor.fr/Restaurant_Review-g155033-d4089423-Reviews-La_Planque-Quebec_City_Quebec.html",
+        "geometry": {
+            "type": "Point",
+            "coordinates": [
+                -71.230225,
+                46.82666
+            ]
+        }
+    },
+    {
+        "name": "Chez Biceps BBQ",
+        "classement": "4,5",
+        "type": [],
+        "price": "€€-€€€",
+        "address": "5151 Henri Bourassa, Québec (ville), Québec G1H 3B1 Canada",
+        "link": "https://www.tripadvisor.fr/Restaurant_Review-g155033-d9880173-Reviews-Chez_Biceps_BBQ-Quebec_City_Quebec.html",
+        "geometry": {
+            "type": "Point",
+            "coordinates": [
+                -71.247055,
+                46.85044
+            ]
+        }
+    },
+    {
+        "name": "Masaru Sushi",
+        "classement": "4,5",
+        "type": [
+            "Sushi",
+            "Végétariens bienvenus",
+            "Choix végétaliens"
+        ],
+        "price": "€",
+        "address": "Garneau, Québec (ville), Québec G1R 3V5 Canada",
+        "link": "https://www.tripadvisor.fr/Restaurant_Review-g155033-d2221056-Reviews-Masaru_Sushi-Quebec_City_Quebec.html",
+        "geometry": {
+            "type": "Point",
+            "coordinates": [
+                -71.20862,
+                46.814774
+            ]
+        }
+    },
+    {
+        "name": "La Gueule de Bois",
+        "classement": "4,5",
+        "type": [
+            "Française",
+            "Canadienne"
+        ],
+        "price": "€€-€€€",
+        "address": "207 rue de Saint-Vallier Est, Québec (ville), Québec G1K 3P2 Canada",
+        "link": "https://www.tripadvisor.fr/Restaurant_Review-g155033-d3332237-Reviews-La_Gueule_de_Bois-Quebec_City_Quebec.html",
+        "geometry": {
+            "type": "Point",
+            "coordinates": [
+                -71.22732,
+                46.811657
+            ]
+        }
+    },
+    {
+        "name": "Le Continental",
+        "classement": "4,5",
+        "type": [
+            "Française",
+            "Canadienne",
+            "Végétariens bienvenus"
+        ],
+        "price": "€€€€",
+        "address": "26 Rue St-Louis, Québec (ville), Québec G1R 3Y9 Canada",
+        "link": "https://www.tripadvisor.fr/Restaurant_Review-g155033-d706085-Reviews-Le_Continental-Quebec_City_Quebec.html",
+        "geometry": {
+            "type": "Point",
+            "coordinates": [
+                -71.20685,
+                46.811768
+            ]
+        }
+    },
+    {
+        "name": "Hotel Manoir Victoria",
+        "classement": "4,5",
+        "type": [
+            "Canadienne"
+        ],
+        "price": "€€-€€€",
+        "address": "44 Cote Du Palais, Québec (ville), Québec G1R 4H8 Canada",
+        "link": "https://www.tripadvisor.fr/Restaurant_Review-g155033-d979402-Reviews-Hotel_Manoir_Victoria-Quebec_City_Quebec.html",
+        "geometry": {
+            "type": "Point",
+            "coordinates": [
+                -71.21089,
+                46.814518
+            ]
+        }
+    },
+    {
+        "name": "Restaurant Légende",
+        "classement": "4,5",
+        "type": [
+            "Moderne",
+            "Bar à vins",
+            "Canadienne"
+        ],
+        "price": "€€€€",
+        "address": "255, rue Saint-Paul, Québec (ville), Québec G1K 3W5 Canada",
+        "link": "https://www.tripadvisor.fr/Restaurant_Review-g155033-d6541169-Reviews-Restaurant_Legende-Quebec_City_Quebec.html",
+        "geometry": {
+            "type": "Point",
+            "coordinates": [
+                -71.21001,
+                46.81695
+            ]
+        }
+    },
+    {
+        "name": "L'Affaire Est Ketchup",
+        "classement": "4,5",
+        "type": [
+            "Française",
+            "Canadienne",
+            "Végétariens bienvenus"
+        ],
+        "price": "€€-€€€",
+        "address": "46 Rue Saint-Joseph Est, Québec (ville), Québec G1K 3A5 Canada",
+        "link": "https://www.tripadvisor.fr/Restaurant_Review-g155033-d2335512-Reviews-L_Affaire_Est_Ketchup-Quebec_City_Quebec.html",
+        "geometry": {
+            "type": "Point",
+            "coordinates": [
+                -71.23053,
+                46.81217
+            ]
+        }
+    },
+    {
+        "name": "Les Sales Gosses",
+        "classement": "4,5",
+        "type": [
+            "Italienne",
+            "Française",
+            "Européenne"
+        ],
+        "price": "€€-€€€",
+        "address": "620 Rue Saint Joseph Est, Québec (ville), Québec G1K 3B9 Canada",
+        "link": "https://www.tripadvisor.fr/Restaurant_Review-g155033-d6889903-Reviews-Les_Sales_Gosses-Quebec_City_Quebec.html",
+        "geometry": {
+            "type": "Point",
+            "coordinates": [
+                -71.22169,
+                46.815166
+            ]
+        }
+    },
+    {
+        "name": "Chez Boulay-bistro boréal",
+        "classement": "4,5",
+        "type": [
+            "Française",
+            "Diner",
+            "Canadienne"
+        ],
+        "price": "€€€€",
+        "address": "1110 Rue Saint-Jean, Québec (ville), Québec G1R 1S4 Canada",
+        "link": "https://www.tripadvisor.fr/Restaurant_Review-g155033-d3169110-Reviews-Chez_Boulay_bistro_boreal-Quebec_City_Quebec.html",
+        "geometry": {
+            "type": "Point",
+            "coordinates": [
+                -71.21081,
+                46.814037
+            ]
+        }
+    },
+    {
+        "name": "Chocolato",
+        "classement": "4,5",
+        "type": [
+            "Desserts",
+            "Café",
+            "Restauration rapide"
+        ],
+        "price": "€",
+        "address": "1015 Rue Saint Jean, Québec (ville), Québec G1R 1R8 Canada",
+        "link": "https://www.tripadvisor.fr/Restaurant_Review-g155033-d12419885-Reviews-Chocolato_rue_Saint_Jean-Quebec_City_Quebec.html",
+        "geometry": {
+            "type": "Point",
+            "coordinates": [
+                -71.21246,
+                46.812984
+            ]
+        }
+    },
+    {
+        "name": "Ciccio Cafe",
+        "classement": "4,5",
+        "type": [
+            "Italienne",
+            "Végétariens bienvenus",
+            "Choix végétaliens"
+        ],
+        "price": "€€-€€€",
+        "address": "875 Rue De Claire-Fontaine, Québec (ville), Québec G1R 3A8 Canada",
+        "link": "https://www.tripadvisor.fr/Restaurant_Review-g155033-d703364-Reviews-Ciccio_Cafe-Quebec_City_Quebec.html",
+        "geometry": {
+            "type": "Point",
+            "coordinates": [
+                -71.22184,
+                46.80833
+            ]
+        }
+    },
+    {
+        "name": "Bati Bassac",
+        "classement": "4,5",
+        "type": [
+            "Asiatique",
+            "Thaï",
+            "cambodgienne"
+        ],
+        "price": "€€-€€€",
+        "address": "125 Rue Saint-Joseph East St-Joseph est, Québec (ville), Québec G1K 3A8 Canada",
+        "link": "https://www.tripadvisor.fr/Restaurant_Review-g155033-d3398327-Reviews-Bati_Bassac-Quebec_City_Quebec.html",
+        "geometry": {
+            "type": "Point",
+            "coordinates": [
+                -71.22955,
+                46.81255
+            ]
+        }
+    },
+    {
+        "name": "L'Orygine",
+        "classement": "4,5",
+        "type": [
+            "Moderne",
+            "Saine",
+            "Canadienne"
+        ],
+        "price": "€€-€€€",
+        "address": "36 ½ rue Saint-Pierre, Québec (ville), Québec G1K 3Z6 Canada",
+        "link": "https://www.tripadvisor.fr/Restaurant_Review-g155033-d14783844-Reviews-L_Orygine-Quebec_City_Quebec.html",
+        "geometry": {
+            "type": "Point",
+            "coordinates": [
+                -71.20238,
+                46.813354
+            ]
+        }
+    },
+    {
+        "name": "Le Clocher Penché",
+        "classement": "4,5",
+        "type": [
+            "Française",
+            "Européenne",
+            "Canadienne"
+        ],
+        "price": "€€-€€€",
+        "address": "203 St-Joseph E Quartier St-Roch, Québec (ville), Québec G1X 5H4 Canada",
+        "link": "https://www.tripadvisor.fr/Restaurant_Review-g155033-d706050-Reviews-Le_Clocher_Penche-Quebec_City_Quebec.html",
+        "geometry": {
+            "type": "Point",
+            "coordinates": [
+                -71.22832,
+                46.812943
+            ]
+        }
+    },
+    {
+        "name": "Le Saint-Amour",
+        "classement": "4,5",
+        "type": [
+            "Française",
+            "Canadienne",
+            "Végétariens bienvenus"
+        ],
+        "price": "€€€€",
+        "address": "48 Rue Sainte-Ursule, Québec (ville), Québec G1R 4E2 Canada",
+        "link": "https://www.tripadvisor.fr/Restaurant_Review-g155033-d706185-Reviews-Restaurant_Le_Saint_Amour-Quebec_City_Quebec.html",
+        "geometry": {
+            "type": "Point",
+            "coordinates": [
+                -71.21045,
+                46.811195
+            ]
+        }
+    },
+    {
+        "name": "Ophelia",
+        "classement": "4,5",
+        "type": [
+            "Fruits de mer & Poisson",
+            "Grillades",
+            "Canadienne"
+        ],
+        "price": "€€€€",
+        "address": "634 Grande-Allée Est, Québec (ville), Québec G1R 2K5 Canada",
+        "link": "https://www.tripadvisor.fr/Restaurant_Review-g155033-d12579852-Reviews-Ophelia-Quebec_City_Quebec.html",
+        "geometry": {
+            "type": "Point",
+            "coordinates": [
+                -71.21664,
+                46.806503
+            ]
+        }
+    },
+    {
+        "name": "Restaurant Le Galopin",
+        "classement": "4,5",
+        "type": [
+            "Française",
+            "Européenne",
+            "Canadienne"
+        ],
+        "price": "€€€€",
+        "address": "3135 Ch Saint-Louis, Québec (ville), Québec G1W 1R9 Canada",
+        "link": "https://www.tripadvisor.fr/Restaurant_Review-g155033-d706101-Reviews-Restaurant_Le_Galopin-Quebec_City_Quebec.html",
+        "geometry": {
+            "type": "Point",
+            "coordinates": [
+                -71.29386,
+                46.756535
+            ]
+        }
+    },
+    {
+        "name": "La Galette Libanaise",
+        "classement": "4,5",
+        "type": [
+            "Libanaise",
+            "Restauration rapide",
+            "Méditerranéenne"
+        ],
+        "price": "€",
+        "address": "641 Grande-Allée est, Québec (ville), Québec G1R 2K4 Canada",
+        "link": "https://www.tripadvisor.fr/Restaurant_Review-g155033-d3323821-Reviews-La_Galette_Libanaise-Quebec_City_Quebec.html",
+        "geometry": {
+            "type": "Point",
+            "coordinates": [
+                -71.21624,
+                46.806305
+            ]
+        }
+    },
+    {
+        "name": "Bistro Sous le Fort",
+        "classement": "4,5",
+        "type": [
+            "Française",
+            "Européenne",
+            "Canadienne"
+        ],
+        "price": "€€-€€€",
+        "address": "48 Sous-le-Fort, Québec (ville), Québec G1K 4G8 Canada",
+        "link": "https://www.tripadvisor.fr/Restaurant_Review-g155033-d709166-Reviews-Bistro_Sous_le_Fort-Quebec_City_Quebec.html",
+        "geometry": {
+            "type": "Point",
+            "coordinates": [
+                -71.20333,
+                46.812588
+            ]
+        }
+    },
+    {
+        "name": "Chez Muffy",
+        "classement": "4,5",
+        "type": [
+            "Internationale",
+            "Végétariens bienvenus",
+            "Choix végétaliens"
+        ],
+        "price": "€€€€",
+        "address": "10 Rue Saint-Antoine Auberge Saint-Antoine Hotel, Québec (ville), Québec G1K 4C9 Canada",
+        "link": "https://www.tripadvisor.fr/Restaurant_Review-g155033-d707663-Reviews-Chez_Muffy-Quebec_City_Quebec.html",
+        "geometry": {
+            "type": "Point",
+            "coordinates": [
+                -71.2019,
+                46.814587
+            ]
+        }
+    }
+]

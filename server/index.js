@@ -23,6 +23,7 @@ async function test(session) {
         console.log(node.properties.name)
     } finally {
         await session.close()
+        await driver.close()
     }
 }
 test(session);

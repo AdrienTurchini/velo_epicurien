@@ -3,6 +3,30 @@ const mongoose = require('mongoose');
 const neo4j = require('neo4j-driver');
 const populate = require('./populate.js');
 
+var driver = neo4j.driver(
+    'bolt://neo4j:7687'
+);
+var session = driver.session({ defaultAccessMode: neo4j.session.WRITE });
+
+populate.neo4j(session);
+
+session = driver.session({ defaultAccessMode: neo4j.session.READ });
+async function test(session) {
+    const personName = 'Alice'
+    try {
+        const result = await session.run(
+            'MATCH (a:Person {name: $name}) RETURN a',
+            { name: personName }
+        )
+        const singleRecord = result.records[0]
+        const node = singleRecord.get(0)   
+        console.log(node.properties.name)
+    } finally {
+        await session.close()
+    }
+}
+test(session);
+
 // Connect to Mongo daemon
 mongoose.connect(
     'mongodb://mongo:27017', { 

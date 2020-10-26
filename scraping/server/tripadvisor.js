@@ -59,11 +59,21 @@ const restauDetails = data => {
  });
 
  var price = infos[0];
+ is_a_price = /€/.test(price)
  var types = []
- for(i = 1;i < infos.length; i++){
-   types.push(infos[i]);
- }
 
+ if(is_a_price){
+  for(i = 1;i < infos.length; i++){
+    types.push(infos[i]);
+  }
+ }
+ else {
+   price = "NA";
+   for(i = 0;i < infos.length; i++){
+    types.push(infos[i]);
+  }
+ }
+ 
  return { name, classement, types, price, address, geo};
 };
 

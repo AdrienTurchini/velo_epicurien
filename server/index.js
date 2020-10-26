@@ -1,7 +1,7 @@
 const app = require('express')();
 const mongoose = require('mongoose');
 const neo4j = require('neo4j-driver');
-const populateMongo = require('./populate.js');
+const populate = require('./populate.js');
 
 // Connect to Neo4j daemon
 const driver = neo4j.driver(
@@ -38,7 +38,7 @@ const schema = new mongoose.Schema({}, {strict: false, versionKey: false, id: fa
 const Restaurants = mongoose.model('restaurants', schema,'restaurants');
 
 async function queryAndPop(Restaurants) {
-    await populateMongo(Restaurants);
+    await populate.mongo(Restaurants);
     
     await Restaurants.find({})
     .then(restaurants =>  {

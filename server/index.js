@@ -1,6 +1,7 @@
 const app = require('express')();
 const mongoose = require('mongoose');
 const neo4j = require('neo4j-driver');
+const populateMongo = require('./populate.js');
 
 // Connect to Neo4j daemon
 var driver = neo4j.driver(
@@ -30,3 +31,8 @@ app.get("/heartbeat", (req, res) => {
 });
 
 app.listen(3000, () => console.log('Server running...'));
+
+// Mongo population
+const schema = new mongoose.Schema({}, {strict: false, versionKey: false, id: false}, 'movies');
+const Restaurants = mongoose.model('restaurants', schema,'restaurants');
+populateMongo(Restaurants);

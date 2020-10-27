@@ -107,24 +107,29 @@ async function neo4jLongueurPistes(extracted_data) {
 
 // Get extracted_data route
 app.get("/extracted_data", (req, res) => {
-    neo4jLongueurPistes(true);
-    mongoNbRestaurants()
-    res.send({
-        nbRestaurants: nbRestaurants,
-        nbSegments: nbSegments
+    neo4jLongueurPistes(true).then(() => {
+        mongoNbRestaurants().then(() => {
+            res.send({
+                nbRestaurants: nbRestaurants,
+                nbSegments: nbSegments
+            });
+        })
     });
     
     
+        
 });
 
 // Get transformed_data route
 app.get("/transformed_data", (req, res) => {
-    neo4jLongueurPistes(false)
-    mongoNbRestaurantsForTypes()
-    res.send({
+    neo4jLongueurPistes(false).then(() => {
+        mongoNbRestaurantsForTypes().then(() => {
+            res.send({
         restaurants: restaurant_types,
         longueurCyclable: longueurCyclable
-    });
+        });
+    })
+});
         
 
     

@@ -1,6 +1,5 @@
 const axios = require('axios');
 const cheerio = require('cheerio');
-const { types } = require('util');
 
 
 // return number of pages containing restaurants 
@@ -52,29 +51,8 @@ const restauDetails = data => {
  geo_inverted = [parseFloat(long_lat[1]),parseFloat(long_lat[0])];
  geo = {"type" : "Point", "coordinates":geo_inverted}
 
- // get type
- var infos = [];
- $('span._13OzAOXO._34GKdBMV > a').each((i, elem) => {
-   infos.push($(elem).text())
- });
 
- var price = infos[0];
- is_a_price = /€/.test(price)
- var types = []
-
- if(is_a_price){
-  for(i = 1;i < infos.length; i++){
-    types.push(infos[i]);
-  }
- }
- else {
-   price = "NA";
-   for(i = 0;i < infos.length; i++){
-    types.push(infos[i]);
-  }
- }
- 
- return { name, classement, types, price, address, geo};
+ return { name, classement, address, geo};
 };
 
 // return links of restaurants for one page

@@ -74,7 +74,7 @@ async function neo4jPopulate() {
 
 // add 7sec to let neo4j start
 function delayNeo4jPopulation() {
-    setTimeout(() => {neo4jPopulate()}, 7000)};
+    setTimeout(() => {neo4jPopulate()}, 10000)};
     delayNeo4jPopulation();
 
 // get nb of roads and total length
@@ -108,24 +108,26 @@ async function neo4jLongueurPistes(extracted_data) {
 // Get extracted_data route
 app.get("/extracted_data", (req, res) => {
     neo4jLongueurPistes(true);
-    mongoNbRestaurants().then(() => {
-        res.send({
-            nbRestaurants: nbRestaurants,
-            nbSegments: nbSegments
-        });
-    })
+    mongoNbRestaurants()
+    res.send({
+        nbRestaurants: nbRestaurants,
+        nbSegments: nbSegments
+    });
+    
     
 });
 
 // Get transformed_data route
 app.get("/transformed_data", (req, res) => {
-    neo4jLongueurPistes(false);
-    mongoNbRestaurantsForTypes().then(() => {
-        res.send({
-            restaurants: restaurant_types,
-            longueurCyclable: longueurCyclable
-        });
-    })
+    neo4jLongueurPistes(false)
+    mongoNbRestaurantsForTypes()
+    res.send({
+        restaurants: restaurant_types,
+        longueurCyclable: longueurCyclable
+    });
+        
+
+    
 });
 
 app.listen(3000, () => console.log('Express server running...'));

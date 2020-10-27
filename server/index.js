@@ -25,7 +25,7 @@ app.get('/',function(req,res) {
 
 // Get heartbeat route
 app.get("/heartbeat", (req, res) => {
-    res.send({
+    res.json({
         villeChoisie: "Quebec"
     });
 });
@@ -109,7 +109,7 @@ async function neo4jLongueurPistes(extracted_data) {
 app.get("/extracted_data", (req, res) => {
     neo4jLongueurPistes(true).then(() => {
         mongoNbRestaurants().then(() => {
-            res.send({
+            res.json({
                 nbRestaurants: nbRestaurants,
                 nbSegments: nbSegments
             });
@@ -124,9 +124,9 @@ app.get("/extracted_data", (req, res) => {
 app.get("/transformed_data", (req, res) => {
     neo4jLongueurPistes(false).then(() => {
         mongoNbRestaurantsForTypes().then(() => {
-            res.send({
-        restaurants: restaurant_types,
-        longueurCyclable: longueurCyclable
+            res.json({
+                restaurants: restaurant_types,
+                longueurCyclable: longueurCyclable
         });
     })
 });

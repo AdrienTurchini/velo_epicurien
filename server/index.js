@@ -91,6 +91,11 @@ async function neo4jLongueurPistes() {
     })
 };
 
+// add 7sec to let neo4j start
+function delayAll() {
+    setTimeout(() => {popAndQuerys()}, 10000)};
+delayAll();
+
 async function popAndQuerys() {
     await neo4jPopulate();
     await mongoPopulate();
@@ -98,7 +103,6 @@ async function popAndQuerys() {
     await mongoNbRestaurantsForTypes();
     await mongoNbRestaurants();
 }
-popAndQuerys();
 
 // Get extracted_data route
 app.get("/extracted_data", async (req, res) => {

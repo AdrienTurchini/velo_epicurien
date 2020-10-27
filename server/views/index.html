@@ -1,17 +1,41 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html>
+    
 <head>
-    <meta charset="utf-8" />
     <title>Vélo épicurien</title>
-    <link rel="icon" href="images/favicon.png">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
 </head>
+
 <body>
-    <form>
-        <button formaction="/heartbeat">Go to heartbeat !</button>
-        <button formaction='/extracted_data'>Go to extracted_data !</button>
-        <button formaction="/transformed_data">Go to transformed_data !</button>
-    </form>
-    Please wait approximatively 1 min for the neo4j database to be populate.
-    You can see when it is done in the console, a message will be display.
+    <div style="margin:100px;">
+        <nav class="navbar navbar-inverse navbar-static-top">
+            <div class="container">
+                <a class="navbar-brand" href="/">Vélo épicurien</a>
+                <ul class="nav navbar-nav">
+                    <li class="active">
+                        <a href="/">Home</a>
+                    </li>
+                    <li>
+                        <a href="/heartbeat">heartbeat</a>
+                    </li>
+                    <li>
+                        <a href="/extracted_data">extracted_data</a>
+                    </li>
+                    <li>
+                        <a href="/transformed_data">transformed_data</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <div class="jumbotron" style="padding:40px;">
+            <h1>Hello, world!</h1>
+            <p>Please wait approximatively 1 min for the neo4j database to be populate.
+                You can see when it is done in the console, a message will be display.</p>
+        </div>
+    </div>
 </body>
-</html>
+
+</html

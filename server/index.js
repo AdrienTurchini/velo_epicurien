@@ -72,10 +72,13 @@ async function neo4jPopulate() {
     session.close();
 };
 
-// add 7sec to let neo4j start
+// add 10sec to let neo4j start
 function delayNeo4jPopulation() {
-    setTimeout(() => {neo4jPopulate()}, 10000)};
-    delayNeo4jPopulation();
+    setTimeout(() => {
+        neo4jPopulate()
+    }, 10000);
+};
+delayNeo4jPopulation();
 
 // get nb of roads and total length
 var nbSegments;
@@ -83,11 +86,10 @@ var longueurCyclable;
 async function neo4jLongueurPistes(extracted_data) {
     var session = driver.session({ defaultAccessMode: neo4j.session.READ });
     const requete = 'MATCH (p:Piste) RETURN p.longueur';
-    var readResultPromise = session.readTransaction(txc => {
+    await session.readTransaction(txc => {
         var result = txc.run(requete);
         return result;
-    });
-    readResultPromise.then(result => {
+    }).then(result => {
         if(extracted_data == true){
             nbSegments = result.records.length;
         }
@@ -96,7 +98,6 @@ async function neo4jLongueurPistes(extracted_data) {
             for(var i in result.records){
                 longueurCyclable += parseFloat(result.records[i]._fields[0]);
             }
-            
         }
     }).catch(err => {
         console.log(err);
@@ -106,33 +107,24 @@ async function neo4jLongueurPistes(extracted_data) {
 };
 
 // Get extracted_data route
-app.get("/extracted_data", (req, res) => {
-    neo4jLongueurPistes(true).then(() => {
-        mongoNbRestaurants().then(() => {
-            res.json({
-                nbRestaurants: nbRestaurants,
-                nbSegments: nbSegments
-            });
-        })
+app.get("/extracted_data", async (req, res) => {
+    await neo4jLongueurPistes(true);
+    await mongoNbRestaurants();
+    res.json({
+        nbRestaurants: nbRestaurants,
+        nbSegments: nbSegments
     });
-    
-    
-        
 });
+
 
 // Get transformed_data route
-app.get("/transformed_data", (req, res) => {
-    neo4jLongueurPistes(false).then(() => {
-        mongoNbRestaurantsForTypes().then(() => {
-            res.json({
-                restaurants: restaurant_types,
-                longueurCyclable: longueurCyclable
-        });
-    })
-});
-        
-
-    
+app.get("/transformed_data", async (req, res) => {
+    await neo4jLongueurPistes(false)
+    await mongoNbRestaurantsForTypes()
+    res.json({
+        restaurants: restaurant_types,
+        longueurCyclable: longueurCyclable
+    });
 });
 
 app.listen(3000, () => console.log('Express server running...'));

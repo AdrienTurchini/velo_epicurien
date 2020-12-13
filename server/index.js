@@ -52,6 +52,18 @@ async function mongoNbRestaurantsForTypes() {
     }
 }
 
+// get restaurants for types
+var types = [];
+async function mongoRestaurantsTypes() {
+    var type = await Restaurants.aggregate([
+        {$unwind:"$type"},
+        {$group: {"_id": "$type"}},
+    ]);
+    for(var i in type) {
+        types.push(type[i]._id);
+    }
+}
+
 ////// NEO4J //////
 //populate
 async function neo4jPopulate() {
@@ -86,22 +98,16 @@ async function neo4jLongueurPistes() {
 function delayAll() {
     setTimeout(() => {
         if (isMongoNotPopulate()) {
-            pop()
-        }
-        querys();
+            pop();
+        };
     }, 10000)};
 delayAll();
 
 async function pop() {
     await neo4jPopulate();
     await mongoPopulate();
-}
 
-async function querys() {
-    await neo4jLongueurPistes();
-    await mongoNbRestaurantsForTypes();
-    await mongoNbRestaurants();
-}
+};
 
 // Get index.html route
 app.get('/',function(req,res) {
@@ -124,6 +130,8 @@ app.get("/heartbeat", (req, res) => {
 
 // Get extracted_data route
 app.get("/extracted_data", async (req, res) => {
+    await mongoNbRestaurants();
+    await neo4jLongueurPistes();
     res.json({
         nbRestaurants: nbRestaurants,
         nbSegments: nbSegments
@@ -131,11 +139,21 @@ app.get("/extracted_data", async (req, res) => {
 });
 
 // Get transformed_data route
-app.get("/transformed_data", (req, res) => {
+app.get("/transformed_data", async (req, res) => {
+    await neo4jLongueurPistes();
+    await mongoNbRestaurantsForTypes();
     res.json({
         restaurants: restaurant_types,
         longueurCyclable: longueurCyclable
     });
+});
+
+// Get transformed_data route
+app.get("/type", async (req, res) => {
+    await mongoRestaurantsTypes();
+    res.json(
+        types
+    );
 });
 
 app.listen(3000, () => console.log('Express server running...'));

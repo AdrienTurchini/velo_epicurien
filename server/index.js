@@ -92,7 +92,7 @@ async function neo4jLongueurPistes() {
 // add 10sec to let neo4j start
 function delayAll() {
     setTimeout(() => {
-        nb = Restaurants.count().then(result =>  {
+        Restaurants.count().then(result =>  {
             if (result == 0){
                 pop();
             }

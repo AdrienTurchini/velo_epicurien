@@ -25,11 +25,6 @@ async function mongoPopulate() {
     await populate.mongo(Restaurants);
 };
 
-async function isMongoNotPopulate() {
-    if (Restaurants.find({}).count() == 0) return true;
-    return false;
-}
-
 // get nb of restaurants
 var nbRestaurants;
 async function mongoNbRestaurants() {
@@ -97,11 +92,12 @@ async function neo4jLongueurPistes() {
 // add 10sec to let neo4j start
 function delayAll() {
     setTimeout(() => {
-        if (isMongoNotPopulate()) {
-            pop();
-        };
-    }, 10000)
-};
+        nb = Restaurants.count().then(result =>  {
+            if (result == 0){
+                pop();
+            }
+        });
+    }, 10000)};
 delayAll();
 
 async function pop() {

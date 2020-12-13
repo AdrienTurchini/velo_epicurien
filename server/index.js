@@ -97,6 +97,11 @@ app.get('/',function(req,res) {
     });
 });
 
+// Get index.html route
+app.get('/readme',function(req,res) {
+    res.sendFile('../README.md');
+});
+
 // Get heartbeat route
 app.get("/heartbeat", (req, res) => {
     res.json({

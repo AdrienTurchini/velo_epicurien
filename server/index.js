@@ -10,15 +10,15 @@ var driver = neo4j.driver(
 
 // Connect to Mongo daemon
 mongoose.connect(
-    'mongodb://mongo:27017', { 
-        useNewUrlParser: true 
-    })
+    'mongodb://mongo:27017', {
+    useNewUrlParser: true
+})
     .then(() => console.log('MongoDB Connected !'))
     .catch(err => console.log(err));
 
 ////// MONGO ///////
-const schema = new mongoose.Schema({}, {strict: false, versionKey: false, id: false}, 'restaurants');
-const Restaurants = mongoose.model('restaurants', schema,'restaurants');
+const schema = new mongoose.Schema({}, { strict: false, versionKey: false, id: false }, 'restaurants');
+const Restaurants = mongoose.model('restaurants', schema, 'restaurants');
 
 // populate
 async function mongoPopulate() {
@@ -34,20 +34,20 @@ async function isMongoNotPopulate() {
 var nbRestaurants;
 async function mongoNbRestaurants() {
     await Restaurants.find({}).count()
-    .then(result =>  {
-        nbRestaurants = result;
-    });
+        .then(result => {
+            nbRestaurants = result;
+        });
 }
 
 // get nb of restaurants for types
 var restaurant_types = {};
 async function mongoNbRestaurantsForTypes() {
     var types = await Restaurants.aggregate([
-        {$unwind:"$type"},
-        {$group: {"_id": "$type", "total": {"$sum": 1}}},
-        {$sort: {"total": -1, posts: 1}}
+        { $unwind: "$type" },
+        { $group: { "_id": "$type", "total": { "$sum": 1 } } },
+        { $sort: { "total": -1, posts: 1 } }
     ]);
-    for(var i in types) {
+    for (var i in types) {
         restaurant_types[types[i]._id] = types[i].total;
     }
 }
@@ -56,10 +56,10 @@ async function mongoNbRestaurantsForTypes() {
 var types = [];
 async function mongoRestaurantsTypes() {
     var type = await Restaurants.aggregate([
-        {$unwind:"$type"},
-        {$group: {"_id": "$type"}},
+        { $unwind: "$type" },
+        { $group: { "_id": "$type" } },
     ]);
-    for(var i in type) {
+    for (var i in type) {
         types.push(type[i]._id);
     }
 }
@@ -84,7 +84,7 @@ async function neo4jLongueurPistes() {
     }).then(result => {
         nbSegments = result.records.length;
         longueurCyclable = 0;
-        for(var i in result.records){
+        for (var i in result.records) {
             longueurCyclable += parseFloat(result.records[i]._fields[0]);
         }
     }).catch(err => {
@@ -100,7 +100,8 @@ function delayAll() {
         if (isMongoNotPopulate()) {
             pop();
         };
-    }, 10000)};
+    }, 10000)
+};
 delayAll();
 
 async function pop() {
@@ -110,26 +111,31 @@ async function pop() {
 };
 
 // Get index.html route
-app.get('/',function(req,res) {
+app.get('/', function (req, res) {
     res.sendFile('/index.html', {
         root: './views'
     });
 });
 
-// Get index.html route
-app.get('/readme',function(req,res) {
-    res.sendFile('../README.md');
+// Get Readme.md route
+const md = require('markdown-it')();
+const fs = require('fs');
+app.get('/readme', function (req, res) {
+    fs.readFile('./markdown/README.md', 'utf8', (err, data) => {
+        var result = md.render(data);
+        res.send(result);
+    });
 });
 
 // Get heartbeat route
-app.get("/heartbeat", (req, res) => {
+app.get("/heartbeat", function (req, res) {
     res.json({
         villeChoisie: "Quebec"
     });
 });
 
 // Get extracted_data route
-app.get("/extracted_data", async (req, res) => {
+app.get("/extracted_data", async function (req, res) {
     await mongoNbRestaurants();
     await neo4jLongueurPistes();
     res.json({
@@ -149,7 +155,7 @@ app.get("/transformed_data", async (req, res) => {
 });
 
 // Get transformed_data route
-app.get("/type", async (req, res) => {
+app.get("/type", async function (req, res) {
     await mongoRestaurantsTypes();
     res.json(
         types

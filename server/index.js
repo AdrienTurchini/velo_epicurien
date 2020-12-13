@@ -16,20 +16,6 @@ mongoose.connect(
     .then(() => console.log('MongoDB Connected !'))
     .catch(err => console.log(err));
 
-// Get index.html route
-app.get('/',function(req,res) {
-    res.sendFile('/index.html', {
-        root: './views'
-    });
-});
-
-// Get heartbeat route
-app.get("/heartbeat", (req, res) => {
-    res.json({
-        villeChoisie: "Quebec"
-    });
-});
-
 ////// MONGO ///////
 const schema = new mongoose.Schema({}, {strict: false, versionKey: false, id: false}, 'movies');
 const Restaurants = mongoose.model('restaurants', schema,'restaurants');
@@ -91,7 +77,7 @@ async function neo4jLongueurPistes() {
     })
 };
 
-// add 7sec to let neo4j start
+// add 10sec to let neo4j start
 function delayAll() {
     setTimeout(() => {popAndQuerys()}, 10000)};
 delayAll();
@@ -103,6 +89,20 @@ async function popAndQuerys() {
     await mongoNbRestaurantsForTypes();
     await mongoNbRestaurants();
 }
+
+// Get index.html route
+app.get('/',function(req,res) {
+    res.sendFile('/index.html', {
+        root: './views'
+    });
+});
+
+// Get heartbeat route
+app.get("/heartbeat", (req, res) => {
+    res.json({
+        villeChoisie: "Quebec"
+    });
+});
 
 // Get extracted_data route
 app.get("/extracted_data", async (req, res) => {

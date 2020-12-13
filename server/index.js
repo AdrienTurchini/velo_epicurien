@@ -17,13 +17,18 @@ mongoose.connect(
     .catch(err => console.log(err));
 
 ////// MONGO ///////
-const schema = new mongoose.Schema({}, {strict: false, versionKey: false, id: false}, 'movies');
+const schema = new mongoose.Schema({}, {strict: false, versionKey: false, id: false}, 'restaurants');
 const Restaurants = mongoose.model('restaurants', schema,'restaurants');
 
 // populate
 async function mongoPopulate() {
     await populate.mongo(Restaurants);
 };
+
+async function isMongoNotPopulate() {
+    if (Restaurants.find({}).count() == 0) return true;
+    return false;
+}
 
 // get nb of restaurants
 var nbRestaurants;
@@ -79,12 +84,20 @@ async function neo4jLongueurPistes() {
 
 // add 10sec to let neo4j start
 function delayAll() {
-    setTimeout(() => {popAndQuerys()}, 10000)};
+    setTimeout(() => {
+        if (isMongoNotPopulate()) {
+            pop()
+        }
+        querys();
+    }, 10000)};
 delayAll();
 
-async function popAndQuerys() {
+async function pop() {
     await neo4jPopulate();
     await mongoPopulate();
+}
+
+async function querys() {
     await neo4jLongueurPistes();
     await mongoNbRestaurantsForTypes();
     await mongoNbRestaurants();

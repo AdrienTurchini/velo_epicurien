@@ -5,7 +5,7 @@ const data_pistes = require(`./data/quebec_pistes_cyclables.json`).features;
 async function mongo(Restaurants) {
     await Restaurants.deleteMany({})
     .then(console.log(`Successfully deleted all items!`))
-    .catch(err => console.error(`Failed to insert documents: ${err}`));
+    .catch(err => console.error(`Failed to deleted documents: ${err}`));
     
     await Restaurants.insertMany(data_restau)
     .then(result => { console.log(`Successfully inserted ${result.length} items in mongodb database!`);})

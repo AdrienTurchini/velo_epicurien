@@ -59,6 +59,17 @@ async function mongoRestaurantsTypes() {
     }
 }
 
+var trajet = [];
+async function mongoStartingPoint() {
+    var restau = await Restaurants.aggregate([{ $sample: { size: 1 } }]);
+    trajet.push(restau[0])
+    long = restau[0].geometry.coordinates[0].toString()
+    lat = restau[0].geometry.coordinates[1].toString()
+    
+    //geo = restau.geometry
+    console.log(trajet[0].geometry.coordinates)
+}
+
 ////// NEO4J //////
 //populate
 async function neo4jPopulate() {
@@ -155,6 +166,14 @@ app.get("/type", async function (req, res) {
     await mongoRestaurantsTypes();
     res.json(
         types
+    );
+});
+
+// Get starting point
+app.get("/start", async function (req, res) {
+    await mongoStartingPoint();
+    res.json(
+        trajet
     );
 });
 

@@ -93,7 +93,7 @@ async function neo4jNbSegments() {
         var result = txc.run(get_p);
         return result;
     }).then(result => {
-        nbPoint = result;
+        nbPoint = result.records[0]._fields[0].low;;
     }).catch(err => {
         console.log(err);
     }).then(() => {
@@ -105,13 +105,14 @@ async function neo4jNbSegments() {
         var result = txc.run(get_c);
         return result;
     }).then(result => {
-        nbConne = result;
-        nbSegments = nbPoint - nbConne;
+        nbConne = result.records[0]._fields[0].low;;
     }).catch(err => {
         console.log(err);
     }).then(() => {
         session.close();
     })
+
+    nbSegments = nbPoint - nbConne;
 };
 
 // add 10sec to let neo4j start

@@ -65,7 +65,7 @@ async function mongoStartingPoint() {
     trajet.push(restau[0])
     long = restau[0].geometry.coordinates[0].toString()
     lat = restau[0].geometry.coordinates[1].toString()
-    
+
     //geo = restau.geometry
     console.log(trajet[0].geometry.coordinates)
 }
@@ -80,7 +80,7 @@ async function neo4jPopulate() {
 
 // get nb of roads and total length
 var nbSegments;
-var longueurCyclable;
+var longueurCyclable = 0;
 
 async function neo4jNbSegments() {
     var nbPoint = 0;
@@ -93,7 +93,7 @@ async function neo4jNbSegments() {
         var result = txc.run(get_p);
         return result;
     }).then(result => {
-        nbPoint = result.records[0]._fields[0].low;;
+        nbPoint = result.records[0]._fields[0].low;
     }).catch(err => {
         console.log(err);
     }).then(() => {
@@ -105,25 +105,68 @@ async function neo4jNbSegments() {
         var result = txc.run(get_c);
         return result;
     }).then(result => {
-        nbConne = result.records[0]._fields[0].low;;
+        nbConne = result.records[0]._fields[0].low;
     }).catch(err => {
         console.log(err);
     }).then(() => {
         session.close();
     })
-    
+
     nbSegments = nbPoint - nbConne;
 };
+
+function getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2) {
+    var R = 6371; // Radius of the earth in km
+    var dLat = deg2rad(lat2 - lat1);  // deg2rad below
+    var dLon = deg2rad(lon2 - lon1);
+    var a =
+        Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+        Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) *
+        Math.sin(dLon / 2) * Math.sin(dLon / 2)
+        ;
+    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    var d = R * c; // Distance in km
+    return d;
+}
+
+function deg2rad(deg) {
+    return deg * (Math.PI / 180)
+}
+
+async function neo4jLongueurPistes() {
+    const get_coord = 'match (n) return n.coordinates';
+
+    var session = driver.session({ defaultAccessMode: neo4j.session.READ });
+    await session.readTransaction(txc => {
+        var result = txc.run(get_coord);
+        return result;
+    }).then(result => {
+        for (var i in result.records.length - 1) {
+            longueurCyclable_i = result.records[i]._fields.split(",");
+            longueurCyclable_ii = result.records[i+1]._fields.split(",");
+            var lat1 = parseFloat(longueurCyclable_i[0]);
+            var lon1 = parseFloat(longueurCyclable_i[1]);
+            var lat2 = parseFloat(longueurCyclable_ii[0]);
+            var lon2 = parseFloat(longueurCyclable_ii[1]);
+            longueurCyclable += getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2);
+        }
+    }).catch(err => {
+        console.log(err);
+    }).then(() => {
+        session.close();
+    })
+}
 
 // add 10sec to let neo4j start
 function delayAll() {
     setTimeout(() => {
-        Restaurants.count().then(result =>  {
-            if (result == 0){
+        Restaurants.count().then(result => {
+            if (result == 0) {
                 pop();
             }
         });
-    }, 10000)};
+    }, 10000)
+};
 delayAll();
 
 async function pop() {
@@ -167,7 +210,7 @@ app.get("/extracted_data", async function (req, res) {
 
 // Get transformed_data route
 app.get("/transformed_data", async (req, res) => {
-    //await neo4jLongueurPistes();
+    await neo4jLongueurPistes();
     await mongoNbRestaurantsForTypes();
     res.json({
         restaurants: restaurant_types,

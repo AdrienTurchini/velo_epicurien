@@ -81,18 +81,32 @@ async function neo4jPopulate() {
 // get nb of roads and total length
 var nbSegments;
 var longueurCyclable;
-async function neo4jLongueurPistes() {
+
+async function neo4jNbSegments() {
+    var nbPoint = 0;
+    var nbConne = 0;
+    const get_p = 'MATCH (n) RETURN count(n)';
+    const get_c = 'MATCH ()-[r]->() RETURN count(r)';
+
     var session = driver.session({ defaultAccessMode: neo4j.session.READ });
-    const requete = 'MATCH (p:Piste) RETURN p.longueur';
     await session.readTransaction(txc => {
-        var result = txc.run(requete);
+        var result = txc.run(get_p);
         return result;
     }).then(result => {
-        nbSegments = result.records.length;
-        longueurCyclable = 0;
-        for (var i in result.records) {
-            longueurCyclable += parseFloat(result.records[i]._fields[0]);
-        }
+        nbPoint = result;
+    }).catch(err => {
+        console.log(err);
+    }).then(() => {
+        session.close();
+    })
+
+    var session = driver.session({ defaultAccessMode: neo4j.session.READ });
+    await session.readTransaction(txc => {
+        var result = txc.run(get_c);
+        return result;
+    }).then(result => {
+        nbConne = result;
+        nbSegments = nbPoint - nbConne;
     }).catch(err => {
         console.log(err);
     }).then(() => {
@@ -114,7 +128,6 @@ delayAll();
 async function pop() {
     await neo4jPopulate();
     await mongoPopulate();
-
 };
 
 // Get index.html route
@@ -143,8 +156,8 @@ app.get("/heartbeat", function (req, res) {
 
 // Get extracted_data route
 app.get("/extracted_data", async function (req, res) {
+    await neo4jNbSegments();
     await mongoNbRestaurants();
-    await neo4jLongueurPistes();
     res.json({
         nbRestaurants: nbRestaurants,
         nbSegments: nbSegments
@@ -153,7 +166,7 @@ app.get("/extracted_data", async function (req, res) {
 
 // Get transformed_data route
 app.get("/transformed_data", async (req, res) => {
-    await neo4jLongueurPistes();
+    //await neo4jLongueurPistes();
     await mongoNbRestaurantsForTypes();
     res.json({
         restaurants: restaurant_types,

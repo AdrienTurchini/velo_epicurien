@@ -111,7 +111,7 @@ async function neo4jNbSegments() {
     }).then(() => {
         session.close();
     })
-
+    
     nbSegments = nbPoint - nbConne;
 };
 

@@ -153,9 +153,8 @@ async function neo4jGetAllStartingPoints(){
     }).then(result => {
 
         for(var i = 0; i < result.records.length; i++){
-            startingPoints.push(result.records[i]._fields[0].properties.coordinates)
+            startingPoints.push(result.records[i]._fields[0].identity.low)
         }
-        console.log(startingPoints)
     }).catch(err => {
         console.log(err);
     }).then(() => {

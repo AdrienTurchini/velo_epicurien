@@ -83,7 +83,7 @@ var nbSegments;
 var longueurCyclable = 0;
 
 async function neo4jNbSegments() {
-    const nbSeg = 'MATCH (a1)-[]->(a2) RETURN count(*)' 
+    const nbSeg = 'MATCH (a1)-[]->(a2) RETURN count(*)'
 
     var session = driver.session({ defaultAccessMode: neo4j.session.READ });
     await session.readTransaction(txc => {
@@ -126,7 +126,7 @@ async function neo4jLongueurPistes() {
     }).then(result => {
         longueurCyclable = 0
         nbSegments = result.records.length
-        for (var i = 0; i < nbSegments; i++){
+        for (var i = 0; i < nbSegments; i++) {
             point_a = result.records[i]._fields[0].split(",");
             point_b = result.records[i]._fields[1].split(",");
             var lon1 = parseFloat(point_a[0]);
@@ -134,7 +134,7 @@ async function neo4jLongueurPistes() {
             var lon2 = parseFloat(point_b[0]);
             var lat2 = parseFloat(point_b[1]);
             var dist = getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2);
-            longueurCyclable =  longueurCyclable + dist;
+            longueurCyclable = longueurCyclable + dist;
         }
     }).catch(err => {
         console.log(err);
@@ -144,7 +144,7 @@ async function neo4jLongueurPistes() {
 }
 
 var startingPoints = [];
-async function neo4jGetAllStartingPoints(){
+async function neo4jGetAllStartingPoints() {
     const getStartP = 'MATCH (n:Point) WHERE size((n)--()) = 1 RETURN n';
     var session = driver.session({ defaultAccessMode: neo4j.session.READ });
     await session.readTransaction(txc => {
@@ -152,7 +152,7 @@ async function neo4jGetAllStartingPoints(){
         return result;
     }).then(result => {
 
-        for(var i = 0; i < result.records.length; i++){
+        for (var i = 0; i < result.records.length; i++) {
             startingPoints.push(result.records[i]._fields[0].identity.low)
         }
     }).catch(err => {
@@ -240,5 +240,14 @@ app.get("/start", async function (req, res) {
         trajet
     );
 });
+
+////////////////////////////////////////TEST ROUTE
+const bodyParser = require('body-parser');
+app.use(bodyParser.json());
+
+app.get('/starting_point', (req, res) => {
+    var type = red.body.type;
+    var maximumLength = req.body.maximumLength;
+})
 
 app.listen(3000, () => console.log('Express server running...'));

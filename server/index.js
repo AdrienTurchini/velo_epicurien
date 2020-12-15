@@ -162,6 +162,44 @@ async function neo4jGetAllStartingPoints() {
     })
 }
 
+var parcours = []
+async function neo4jGetAllParcours(){
+    await neo4jGetAllStartingPoints()
+    console.log(startingPoints)
+    var requetes = []
+    for (var i = 0; i < 1; i++) // startingPoints.length
+    {
+        for (var j = i + 1; j < startingPoints.length; j++){ 
+            var req =  "MATCH (a:Point),(b:Point), p = shortestPath((a)-[*]-(b)) where id(a) = " + startingPoints[i] + " and id(b) = " + startingPoints[j] + " RETURN p"
+            requetes.push(req)
+        }
+    }
+    console.log(requetes);
+    var session = driver.session({ defaultAccessMode: neo4j.session.READ });
+    const reqLength = requetes.length;
+    for(var i = 0; i < reqLength; i++){
+        console.log(i / reqLength);
+        un_parcours = []
+        await session.readTransaction(txc => {
+            var result = txc.run(requetes[i]);
+            return result;
+        }).then(result => {
+            startPoint = result.records[0]._fields[0].start.properties.coordinates
+            un_parcours.push(startPoint);
+            stopPoint = result.records[0]._fields[0].end.properties.coordinates
+            for(var i = 0; i < result.records[0]._fields[0].segments.length; i++){
+                un_parcours.push(result.records[0]._fields[0].segments[i].start.properties.coordinates);
+            }
+            un_parcours.push(stopPoint)
+            parcours.push(un_parcours)    
+        }).catch(err => {
+            console.log(err);
+        })
+    }
+    session.close()
+    console.log(parcours.length)
+}
+
 
 // add 10sec to let neo4j start
 function delayAll() {
@@ -234,7 +272,7 @@ app.get("/type", async function (req, res) {
 
 // Get starting point
 app.get("/start", async function (req, res) {
-    neo4jGetAllStartingPoints();
+    neo4jGetAllParcours();
     await mongoStartingPoint();
     res.json(
         trajet

@@ -143,6 +143,27 @@ async function neo4jLongueurPistes() {
     })
 }
 
+var startingPoints = [];
+async function neo4jGetAllStartingPoints(){
+    const getStartP = 'MATCH (n:Point) WHERE size((n)--()) = 1 RETURN n';
+    var session = driver.session({ defaultAccessMode: neo4j.session.READ });
+    await session.readTransaction(txc => {
+        var result = txc.run(getStartP);
+        return result;
+    }).then(result => {
+
+        for(var i = 0; i < result.records.length; i++){
+            startingPoints.push(result.records[i]._fields[0].properties.coordinates)
+        }
+        console.log(startingPoints)
+    }).catch(err => {
+        console.log(err);
+    }).then(() => {
+        session.close();
+    })
+}
+
+
 // add 10sec to let neo4j start
 function delayAll() {
     setTimeout(() => {
@@ -214,6 +235,7 @@ app.get("/type", async function (req, res) {
 
 // Get starting point
 app.get("/start", async function (req, res) {
+    neo4jGetAllStartingPoints();
     await mongoStartingPoint();
     res.json(
         trajet

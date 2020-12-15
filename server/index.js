@@ -134,22 +134,26 @@ function deg2rad(deg) {
 }
 
 async function neo4jLongueurPistes() {
-    const get_coord = 'match (n) return n.coordinates';
+    const get_coord = 'match (n1)-[]->(n2) return n1.coordinates, n2.coordinates';
 
     var session = driver.session({ defaultAccessMode: neo4j.session.READ });
     await session.readTransaction(txc => {
         var result = txc.run(get_coord);
         return result;
     }).then(result => {
-        for (var i in result.records.length - 1) {
-            longueurCyclable_i = result.records[i]._fields.split(",");
-            longueurCyclable_ii = result.records[i+1]._fields.split(",");
-            var lat1 = parseFloat(longueurCyclable_i[0]);
-            var lon1 = parseFloat(longueurCyclable_i[1]);
-            var lat2 = parseFloat(longueurCyclable_ii[0]);
-            var lon2 = parseFloat(longueurCyclable_ii[1]);
-            longueurCyclable += getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2);
+        longueurCyclable = 0
+        nbSegments = result.records.length
+        for (var i = 0; i < nbSegments; i++){
+            point_a = result.records[i]._fields[0].split(",");
+            point_b = result.records[i]._fields[1].split(",");
+            var lon1 = parseFloat(point_a[0]);
+            var lat1 = parseFloat(point_a[1]);
+            var lon2 = parseFloat(point_b[0]);
+            var lat2 = parseFloat(point_b[1]);
+            var dist = getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2);
+            longueurCyclable =  longueurCyclable + dist;
         }
+        console.log(longueurCyclable)
     }).catch(err => {
         console.log(err);
     }).then(() => {

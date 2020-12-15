@@ -83,20 +83,38 @@ var nbSegments;
 var longueurCyclable = 0;
 
 async function neo4jNbSegments() {
-
+    var nbPoint = 0;
+    var nbConne = 0;
+    const get_p = 'MATCH (n) RETURN count(n)';
+    const get_c = 'MATCH ()-[r]->() RETURN count(r)';
     const nbSeg = 'match (n1)-[]->(n2) return count(*)' 
+
     var session = driver.session({ defaultAccessMode: neo4j.session.READ });
     await session.readTransaction(txc => {
-        var result = txc.run(nbSeg);
+        var result = txc.run(get_p);
         return result;
     }).then(result => {
-        nbSegments = result.records[0]._fields[0].low;
+        nbPoint = result.records[0]._fields[0].low;
     }).catch(err => {
-    console.log(err);
+        console.log(err);
     }).then(() => {
-    session.close();
+        session.close();
     })
-}
+
+    var session = driver.session({ defaultAccessMode: neo4j.session.READ });
+    await session.readTransaction(txc => {
+        var result = txc.run(get_c);
+        return result;
+    }).then(result => {
+        nbConne = result.records[0]._fields[0].low;
+    }).catch(err => {
+        console.log(err);
+    }).then(() => {
+        session.close();
+    })
+
+    nbSegments = nbPoint - nbConne;
+};
 
 function getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2) {
     var R = 6371; // Radius of the earth in km

@@ -20,6 +20,7 @@ async function neo4j(session) {
             `MATCH (n) DETACH DELETE n`
         ).then(console.log(`Successfully deleted all items!`));
         console.log("PLEASE WAIT FOR NEO4J BEING POPULATED - IT CAN TAKES UP TO 2MIN BUT MIGHT BE SHORTER IF YOU ARE LUCKY ;)")
+        var id = 0;
         for (var i in data_pistes) {
             /*
             await session.run(
@@ -31,10 +32,11 @@ async function neo4j(session) {
             var requete = 'CREATE'
             var link = '-[:LinkedTo]->'
             for (var j in data_pistes[i].geometry.coordinates) {
-                requete = requete + '(:Point {coordinates: \'' + data_pistes[i].geometry.coordinates[j].toString() + '\'})';
+                requete = requete + `(:Point {coordinates: '${data_pistes[i].geometry.coordinates[j].toString()}', index:${id}})`;
                 if (j != data_pistes[i].geometry.coordinates.length - 1) {
                     requete = requete + link;
                 }
+                id += 1;
             }
             await session.run(requete) 
         }

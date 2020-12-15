@@ -83,37 +83,19 @@ var nbSegments;
 var longueurCyclable = 0;
 
 async function neo4jNbSegments() {
-    var nbPoint = 0;
-    var nbConne = 0;
-    const get_p = 'MATCH (n) RETURN count(n)';
-    const get_c = 'MATCH ()-[r]->() RETURN count(r)';
-    const nbSeg = 'match (n1)-[]->(n2) return count(*)' 
+    const nbSeg = 'MATCH (a1)-[]->(a2) RETURN count(*)' 
 
     var session = driver.session({ defaultAccessMode: neo4j.session.READ });
     await session.readTransaction(txc => {
-        var result = txc.run(get_p);
+        var result = txc.run(nbSeg);
         return result;
     }).then(result => {
-        nbPoint = result.records[0]._fields[0].low;
+        nbSegments = result.records[0]._fields[0].low;
     }).catch(err => {
         console.log(err);
     }).then(() => {
         session.close();
     })
-
-    var session = driver.session({ defaultAccessMode: neo4j.session.READ });
-    await session.readTransaction(txc => {
-        var result = txc.run(get_c);
-        return result;
-    }).then(result => {
-        nbConne = result.records[0]._fields[0].low;
-    }).catch(err => {
-        console.log(err);
-    }).then(() => {
-        session.close();
-    })
-
-    nbSegments = nbPoint - nbConne;
 };
 
 function getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2) {

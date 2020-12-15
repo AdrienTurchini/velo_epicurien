@@ -19,18 +19,7 @@ async function neo4j(session) {
         await session.run(
             `MATCH (n) DETACH DELETE n`
         ).then(console.log(`Successfully deleted all items!`));
-
-
-        /*
-        coord = []
-        for(var i in data_pistes){
-            for(var j in data_pistes[i].geometry.coordinates){
-                coord.push(data_pistes[i].geometry.coordinates[j])
-            }
-        }
-        */
-
-        console.log(data_pistes[0])
+        console.log("PLEASE WAIT FOR NEO4J BEING POPULATED - IT CAN TAKES UP TO 2MIN BUT MIGHT BE SHORTER IF YOU ARE LUCKY ;)")
         for (var i in data_pistes) {
             /*
             await session.run(
@@ -39,62 +28,18 @@ async function neo4j(session) {
                 `SET p.coords = [${data_pistes[i].geometry.coordinates}]`
             );
             */
-
             var requete = 'CREATE'
             var link = '-[:LinkedTo]->'
             for (var j in data_pistes[i].geometry.coordinates) {
-                console.log(data_pistes[i].geometry.coordinates)
                 requete = requete + '(:Point {coordinates: \'' + data_pistes[i].geometry.coordinates[j].toString() + '\'})';
                 if (j != data_pistes[i].geometry.coordinates.length - 1) {
                     requete = requete + link;
                 }
             }
-            await session.run(requete)
+            await session.run(requete) 
         }
-
-        /*
-        nbPoints = coord.length;
-        for(var i in coord){
-            console.log(i/nbPoints)
-            for(var j in coord){
-                if(coord[i] == coord[j]){
-                    requete2 = 'MATCH (p1:Point {coordinates: \'' + coord[i].toString() + '\'}) MATCH (p2:Point {coordinates: \'' + coord[j].toString() + '\'}) MERGE (p1)-[:LinkedTo]->(p2)';
-                    await session.run(requete2)
-                }
-            }
-        }
-
-        */
-
-        /*
-                for(var i in coord){
-                    console.log("-----------------------------" + i + "/" + coord.length)
-                    for(var j in coord){
-                        if(i != j){
-                            lat1 = coord[i][0];
-                            //console.log(lat1)
-                            lon1 = coord[i][1];
-                            //console.log(lon1)
-        
-                            lat2 = coord[j][0];
-                            //console.log(lat2)
-        
-                            lon2 = coord[j][1];
-                            //console.log(lon2)
-        
-                            dist = getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2)
-                            if(dist < 0.01 && dist != 0){
-                                //console.log(dist)
-                                requete2 = 'MATCH (p1:Point {coordinates: \'' + coord[i].toString() + '\'}) MATCH (p2:Point {coordinates: \'' + coord[j].toString() + '\'}) MERGE (p1)-[:LinkedTo]->(p2)';
-                                await session.run(requete2)
-                            }
-                        }
-                    }
-                }
-                */
-
-
-
+        requete2 = 'MATCH (a1:Point), (a2:Point) WHERE NOT (a1)-[:LinkedTo]->(a2) AND (a1 <> a2) AND a1.coordinates = a2.coordinates MERGE (a1)-[:LinkedTo]->(a2)' // lie les points aux même coordonnées entre eux
+        await session.run(requete2)
         console.log("Successfully inserted items in the neo4j database");
     } catch {
         console.log("error when populating neo4j database");

@@ -270,22 +270,19 @@ app.get("/type", async function (req, res) {
     );
 });
 
-// Get starting point
-app.get("/start", async function (req, res) {
-    neo4jGetAllParcours();
-    await mongoStartingPoint();
-    res.json(
-        trajet
-    );
-});
-
-////////////////////////////////////////TEST ROUTE
 const bodyParser = require('body-parser');
 app.use(bodyParser.json());
 
 app.get('/starting_point', (req, res) => {
     var type = red.body.type;
     var maximumLength = req.body.maximumLength;
+    res.json(
+        req.body
+    );
+})
+
+app.get('/parcour', (req, res) => {
+    res.json({});
 })
 
 app.listen(3000, () => console.log('Express server running...'));
